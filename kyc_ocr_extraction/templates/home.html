@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="{{url_for('home')}}">
+                    <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    Home
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        {% if session.get("username") %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ session.username }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{url_for('logout')}}">Logout</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('register')}}">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+
+    </head>
+
+    <body>
+        <div class="home-card">
+
+            <h3 class="text-center mb-4">Services</h3>
+
+            <div class="row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Aadhaar</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="{{url_for('aadhaar_data')}}" class="btn btn-primary">Get Details</a>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">PAN</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="{{url_for('pan_data')}}" class="btn btn-primary">Get Details</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+        
+    </body>
+</html>

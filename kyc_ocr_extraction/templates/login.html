@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="{{url_for('home')}}">
+                    <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    Home
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                {% if session.get("username") %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('register')}}">Register</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+
+            </div>
+
+        </nav>
+
+    </head>
+
+    <body>
+        <div class="login-card">
+
+            <h3 class="text-center mb-4">Login</h3>
+
+            <!-- Show flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- If login() sent custom message -->
+            {% if message %}
+                <div class="alert alert-{{ category or 'info' }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endif %}
+
+            <form action="{{ url_for('login') }}" method="POST">
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" name="user_name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+
+                <button class="btn btn-primary w-100">Login</button>
+
+                <p class="text-center mt-3">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}">Register</a>
+                </p>
+            </form>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="{{ url_for('static', filename='bootstrap.bundle.min.js')}}"></script>
+
+    </body>
+</html>

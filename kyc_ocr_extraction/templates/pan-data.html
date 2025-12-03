@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PAN Extraction</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="{{url_for('home')}}">
+                <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Home
+            </a>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if session.get("username") %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ session.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{url_for('logout')}}">Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('register')}}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+
+    </nav>
+
+</head>
+<body>
+
+    <div class="wrapper">
+        <h2>PAN Data Extraction</h2>
+
+        <form id="aadharForm" method="post" enctype="multipart/form-data">
+            <input type="file" name="image_file" accept="image/*" required>
+
+            <button type="submit">Extract</button>
+        </form>
+
+        <!-- Extracted PAN Output -->
+        {% if result %}
+        <div class="output-box">
+            <h3>Extracted PAN Details</h3>
+            <table border="1" cellpadding="10">
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>PAN Number</td>
+                    <td>{{ result.pan_number }}</td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td>{{ result.dob }}</td>
+                </tr>
+
+            </table>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            <a href="{{url_for('logout')}}">Logout</a>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    
+</body>
+</html>

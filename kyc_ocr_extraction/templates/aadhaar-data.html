@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aadhaar Extraction</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="{{url_for('home')}}">
+                <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Home
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if session.get("username") %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ session.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{url_for('logout')}}">Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('register')}}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+
+    </nav>
+
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <h2>Aadhaar Data Extraction</h2>
+
+        <form id="aadharForm" method="post" enctype="multipart/form-data">
+            <input type="file" name="image_file" accept="image/*" required>
+
+            <button type="submit">Extract</button>
+        </form>
+
+        <!-- Extracted Aadhaar Output -->
+        {% if result %}
+            <div class="output-box">
+                <h3>Extracted Aadhar Details</h3>
+                <table border="1" cellpadding="10">
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Aadhar Number</td>
+                        <td>{{ result.aadhaar_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td>{{ result.dob }}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>{{ result.gender }}</td>
+                    </tr>
+
+                </table>
+            </div>
+        {% endif %}
+
+        <div class="footer">
+            <a href="{{url_for('logout')}}">Logout</a>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+
+</body>
+</html>

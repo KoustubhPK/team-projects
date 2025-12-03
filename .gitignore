@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+env/
+.env/
+
+# Directory
+testing_data
+
+# Distribution / packaging
+.Python
+MANIFEST
+
+# Exclude specific files
+backup.py
+
+# Environment variables and sensitive files
+.env
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs and other miscellaneous files
+*.log
+*.temp
+*.tmp
+
+# IDE and OS specific files
+.idea/
+.vscode/
+Thumbs.db
