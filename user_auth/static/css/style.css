@@ -1,0 +1,72 @@
+/* ========== Global ========== */
+body {
+    background: #f4f6f9;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========== Auth Card Container ========== */
+.auth-container {
+    max-width: 420px;
+    margin: 70px auto;
+    background: #ffffff;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.auth-profile-container {
+    max-width: 800px;
+    margin: 70px auto;
+    background: #ffffff;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 18px;
+
+    /* Add your logo image */
+    background-image: url("https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg");
+    background-size: 30px 24px;
+    background-repeat: no-repeat;
+    padding-left: 40px; /* space for logo */
+    height: 24px;
+}
+
+/* ========== Links ========== */
+.auth-link {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 15px;
+    color: #0056d6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+/* ========== Small screens ========== */
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 40px 15px;
+        padding: 20px 25px;
+    }
+}

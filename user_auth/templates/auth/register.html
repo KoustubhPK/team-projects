@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-container mt-5">
+    <h2 class="auth-title">Register</h2>
+    <div id="message"></div>
+    <form id="registerForm">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+        <p class="text-center mt-3">
+            Already have an account?
+            <a href="/login_page">Login</a>
+        </p>
+    </form>
+</div>
+
+{% endblock content %}
